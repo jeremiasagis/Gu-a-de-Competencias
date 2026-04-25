@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TeamCook × Globant — Guía de Competencias para Facilitadores</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap');
+:root{--bg:#080810;--surface:#0F0F1E;--surface2:#131328;--border:#1E1E38;--border2:#262648;--text:#EEEEF8;--text2:#AAAAC4;--text3:#666688;--impact:#FF6B2B;--growth:#4E9EFF;--gold:#FFB830;--green:#4CAF8A;--red:#E57373;}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+.shell{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+@media(max-width:768px){.shell{grid-template-columns:1fr}}
+.sidebar{background:var(--surface);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 0;display:flex;flex-direction:column}
+@media(max-width:768px){.sidebar{display:none}}
+.sb-brand{padding:0 22px 24px;border-bottom:1px solid var(--border)}
+.sb-logo{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--text);margin-bottom:4px}
+.sb-sub{font-size:11px;color:var(--text3);letter-spacing:.04em}
+.sb-section{padding:18px 22px 6px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
+.sb-link{display:flex;align-items:center;gap:10px;padding:8px 22px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .18s;border-left:2px solid transparent;user-select:none}
+.sb-link:hover{color:var(--text);background:var(--surface2)}
+.sb-link.active-i{border-left-color:var(--impact);color:var(--impact);background:rgba(255,107,43,.06)}
+.sb-link.active-g{border-left-color:var(--growth);color:var(--growth);background:rgba(78,158,255,.06)}
+.sb-link.active-n{border-left-color:var(--gold);color:var(--gold);background:rgba(255,184,48,.06)}
+.sb-ico{font-size:15px;width:20px;text-align:center;flex-shrink:0}
+.sb-ruta{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-left:auto;padding:2px 6px;border-radius:4px;flex-shrink:0}
+.sb-ruta-i{background:rgba(255,107,43,.15);color:var(--impact)}
+.sb-ruta-g{background:rgba(78,158,255,.15);color:var(--growth)}
+.main{padding:0;max-width:820px}
+.page{display:none;padding:48px 52px 80px;animation:fadeIn .3s ease}
+.page.active{display:block}
+@media(max-width:768px){.page{padding:28px 20px 60px}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.mobile-nav{display:none;background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px;position:sticky;top:0;z-index:20;gap:6px;align-items:center;flex-wrap:wrap}
+@media(max-width:768px){.mobile-nav{display:flex}}
+.mn-btn{background:var(--surface2);border:1px solid var(--border2);border-radius:7px;padding:6px 10px;font-size:11px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s}
+.mn-btn:hover,.mn-btn.act{border-color:var(--impact);color:var(--impact)}
+.page-eyebrow{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.page-title{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;line-height:1.1;margin-bottom:6px}
+.page-subtitle{font-family:'DM Serif Display',Georgia,serif;font-size:18px;color:var(--text2);font-style:italic;margin-bottom:28px;line-height:1.5}
+@media(max-width:768px){.page-title{font-size:26px}}
+.chapter-divider{height:1px;background:var(--border);margin:32px 0}
+h3.section-head{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+h3.section-head::after{content:'';flex:1;height:1px;background:var(--border)}
+.prose{font-size:15px;line-height:1.8;color:var(--text2);margin-bottom:14px}
+.prose strong{color:var(--text);font-weight:600}
+.prose em{color:var(--text);font-style:italic}
+.lead{font-size:17px;line-height:1.75;color:var(--text);font-family:'DM Serif Display',Georgia,serif;margin-bottom:20px;padding-left:18px;border-left:3px solid var(--impact)}
+.lead-g{border-left-color:var(--growth)}
+.callout{border-radius:12px;padding:16px 18px;margin:16px 0}
+.callout-gold{background:rgba(255,184,48,.05);border:1px solid rgba(255,184,48,.2)}
+.callout-head{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;color:var(--gold)}
+.callout-body{font-size:13.5px;line-height:1.7;color:var(--text2)}
+.callout-body strong{color:var(--text)}
+.note-box{background:rgba(255,184,48,.04);border:1px solid rgba(255,184,48,.15);border-radius:8px;padding:12px 14px;margin:16px 0;font-size:12.5px;color:#C8A870;line-height:1.6}
+.note-box strong{color:var(--gold)}
+.contrast{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+@media(max-width:560px){.contrast{grid-template-columns:1fr}}
+.contrast-card{border-radius:12px;padding:16px}
+.contrast-card h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.contrast-card.pos{background:rgba(76,175,138,.05);border:1px solid rgba(76,175,138,.25)}
+.contrast-card.pos h4{color:var(--green)}
+.contrast-card.neg{background:rgba(229,115,115,.05);border:1px solid rgba(229,115,115,.25)}
+.contrast-card.neg h4{color:var(--red)}
+.contrast-sub{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-top:10px;margin-bottom:4px}
+.contrast-text{font-size:13px;line-height:1.65;color:var(--text2)}
+.q-list{counter-reset:q;margin:8px 0}
+.q-item{background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:12px 14px 12px 42px;margin-bottom:9px;font-size:14px;line-height:1.65;color:var(--text);position:relative}
+.q-item::before{content:counter(q);counter-increment:q;position:absolute;left:13px;top:13px;width:18px;height:18px;background:var(--border2);border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--text3);line-height:18px;text-align:center}
+.rescue-box{background:rgba(255,184,48,.04);border:1px solid rgba(255,184,48,.25);border-radius:12px;padding:16px 18px;margin:18px 0}
+.rescue-box .rh{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:8px}
+.rescue-box .rt{font-size:14px;line-height:1.7;color:#D9C878;font-style:italic}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+.tag-i{background:rgba(255,107,43,.12);color:var(--impact);border:1px solid rgba(255,107,43,.25)}
+.tag-g{background:rgba(78,158,255,.12);color:var(--growth);border:1px solid rgba(78,158,255,.25)}
+.hero{background:linear-gradient(160deg,rgba(255,107,43,.08) 0%,transparent 60%);border:1px solid var(--border2);border-radius:16px;padding:32px 28px;margin-bottom:32px}
+.hero-title{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;line-height:1.1;margin-bottom:10px}
+.hero-title span{background:linear-gradient(135deg,var(--impact),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:15px;color:var(--text2);line-height:1.75;max-width:500px;margin-bottom:22px}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.hero-stat-n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--text)}
+.hero-stat-l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
+.index-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+@media(max-width:520px){.index-grid{grid-template-columns:1fr}}
+.index-card{background:var(--surface);border:1px solid var(--border2);border-radius:11px;padding:14px 16px;cursor:pointer;transition:all .2s}
+.index-card:hover{transform:translateY(-2px);background:var(--surface2)}
+.index-card.ic-i:hover{border-color:rgba(255,107,43,.4)}
+.index-card.ic-g:hover{border-color:rgba(78,158,255,.4)}
+.index-card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.index-card-def{font-size:12px;color:var(--text3);line-height:1.5}
+.ext-link{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:11px 14px;color:var(--text2);text-decoration:none;font-size:13.5px;transition:all .18s;margin-bottom:8px}
+.ext-link:hover{border-color:var(--impact);color:var(--text)}
+.ext-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.scroll-mark{display:flex;gap:8px;justify-content:flex-end;margin-top:40px;padding-top:20px;border-top:1px solid var(--border)}
+.btn-nav{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:8px 16px;font-family:'DM Sans',sans-serif;font-size:12.5px;color:var(--text2);cursor:pointer;transition:all .18s}
+.btn-nav:hover{border-color:var(--impact);color:var(--impact)}
+.ai-section{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:18px;margin:16px 0}
+.ai-section-head{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="shell">
+<nav class="sidebar">
+  <div class="sb-brand">
+    <div class="sb-logo">🍳 TeamCook × Globant</div>
+    <div class="sb-sub">Guía de Competencias · 2026</div>
+  </div>
+  <div class="sb-section">Inicio</div>
+  <div class="sb-link active-n" data-page="index" onclick="go('index')"><span class="sb-ico">🏠</span>Presentación</div>
+  <div class="sb-section">Ruta IMPACT</div>
+  <div class="sb-link" data-page="strategic_thinking" onclick="go('strategic_thinking')"><span class="sb-ico">🧭</span>Strategic Thinking<span class="sb-ruta sb-ruta-i">IMPACT</span></div>
+  <div class="sb-link" data-page="accountability" onclick="go('accountability')"><span class="sb-ico">🎯</span>Accountability<span class="sb-ruta sb-ruta-i">IMPACT</span></div>
+  <div class="sb-link" data-page="customer_value" onclick="go('customer_value')"><span class="sb-ico">💡</span>Customer Value<span class="sb-ruta sb-ruta-i">IMPACT</span></div>
+  <div class="sb-link" data-page="adaptability" onclick="go('adaptability')"><span class="sb-ico">⚡</span>Adaptability<span class="sb-ruta sb-ruta-i">IMPACT</span></div>
+  <div class="sb-link" data-page="ai_mindset" onclick="go('ai_mindset')"><span class="sb-ico">🤖</span>AI Mindset<span class="sb-ruta sb-ruta-i">IMPACT</span></div>
+  <div class="sb-section">Ruta GROWTH</div>
+  <div class="sb-link" data-page="active_listening" onclick="go('active_listening')"><span class="sb-ico">👂</span>Active Listening<span class="sb-ruta sb-ruta-g">GROWTH</span></div>
+  <div class="sb-link" data-page="collaboration" onclick="go('collaboration')"><span class="sb-ico">🤝</span>Collaboration<span class="sb-ruta sb-ruta-g">GROWTH</span></div>
+  <div class="sb-link" data-page="talent_development" onclick="go('talent_development')"><span class="sb-ico">🌟</span>Talent Development<span class="sb-ruta sb-ruta-g">GROWTH</span></div>
+  <div class="sb-link" data-page="learnability" onclick="go('learnability')"><span class="sb-ico">📚</span>Learnability<span class="sb-ruta sb-ruta-g">GROWTH</span></div>
+  <div class="sb-link" data-page="innovation" onclick="go('innovation')"><span class="sb-ico">🔧</span>Innovation<span class="sb-ruta sb-ruta-g">GROWTH</span></div>
+</nav>
+
+<div class="mobile-nav">
+  <span style="font-size:11px;color:var(--text3);width:100%;margin-bottom:4px">Navegación rápida</span>
+  <button class="mn-btn act" onclick="go('index')">🏠</button>
+  <button class="mn-btn" onclick="go('strategic_thinking')">🧭</button>
+  <button class="mn-btn" onclick="go('accountability')">🎯</button>
+  <button class="mn-btn" onclick="go('customer_value')">💡</button>
+  <button class="mn-btn" onclick="go('adaptability')">⚡</button>
+  <button class="mn-btn" onclick="go('ai_mindset')">🤖</button>
+  <button class="mn-btn" onclick="go('active_listening')">👂</button>
+  <button class="mn-btn" onclick="go('collaboration')">🤝</button>
+  <button class="mn-btn" onclick="go('talent_development')">🌟</button>
+  <button class="mn-btn" onclick="go('learnability')">📚</button>
+  <button class="mn-btn" onclick="go('innovation')">🔧</button>
+</div>
+
+<main class="main">
+
+<!-- INDEX -->
+<section id="page-index" class="page active">
+  <div class="hero">
+    <div class="hero-title">Guía de<br><span>Competencias</span></div>
+    <p class="hero-sub">Esta guía está diseñada para que internalizés cada competencia con la profundidad que necesita un facilitador. No se trata de memorizar definiciones, sino de entender cómo funciona cada competencia, por qué importa en contextos reales de trabajo, y qué observar durante el juego para poder nombrarlo con precisión en el Rescate Final.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-n">10</div><div class="hero-stat-l">Competencias</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">2</div><div class="hero-stat-l">Rutas</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">~2h</div><div class="hero-stat-l">Lectura</div></div>
+    </div>
+  </div>
+  <h3 class="section-head">Cómo usar esta guía</h3>
+  <p class="prose">Cada competencia tiene su propia sección con cuatro partes: primero, una explicación conceptual extendida de qué es y por qué existe como categoría de comportamiento relevante; segundo, cómo se manifiesta concretamente tanto en el juego como en el trabajo real en contextos de consultoría tecnológica; tercero, el análisis de los comportamientos contrarios, es decir, qué pasa cuando la competencia está ausente; y finalmente, las preguntas y estrategias para trabajarla en el Rescate Final.</p>
+  <p class="prose">La guía está pensada para volver a ella antes y después de las sesiones, cuando ya tenés experiencia propia del juego y podés releer cada sección con más profundidad.</p>
+  <div class="callout callout-gold">
+    <div class="callout-head">Una advertencia antes de arrancar</div>
+    <div class="callout-body">Las competencias no son casillas donde meter a las personas. Son patrones de comportamiento que aparecen y desaparecen según el contexto, el nivel de presión, la composición del equipo y docenas de variables más. Tu trabajo como facilitador no es diagnosticar quién tiene o no tiene cada competencia, sino crear las condiciones para que el equipo <strong>reconozca sus propios patrones</strong> y tome decisiones sobre qué quiere cambiar.</div>
+  </div>
+  <h3 class="section-head">Las 10 competencias</h3>
+  <div class="index-grid">
+    <div class="index-card ic-i" onclick="go('strategic_thinking')"><div class="index-card-title">🧭 Strategic Thinking<span class="tag tag-i" style="margin-left:auto;font-size:9px">IMPACT</span></div><div class="index-card-def">Ver el contexto completo y decidir con mentalidad de negocio.</div></div>
+    <div class="index-card ic-i" onclick="go('accountability')"><div class="index-card-title">🎯 Accountability<span class="tag tag-i" style="margin-left:auto;font-size:9px">IMPACT</span></div><div class="index-card-def">Asumir responsabilidad por los resultados sin esperar que te lo pidan.</div></div>
+    <div class="index-card ic-i" onclick="go('customer_value')"><div class="index-card-title">💡 Customer Value<span class="tag tag-i" style="margin-left:auto;font-size:9px">IMPACT</span></div><div class="index-card-def">Ejecutar lo que genera impacto real, no lo conveniente.</div></div>
+    <div class="index-card ic-i" onclick="go('adaptability')"><div class="index-card-title">⚡ Adaptability<span class="tag tag-i" style="margin-left:auto;font-size:9px">IMPACT</span></div><div class="index-card-def">Reorganizarse rápido ante el cambio sin caer en el caos.</div></div>
+    <div class="index-card ic-i" onclick="go('ai_mindset')"><div class="index-card-title">🤖 AI Mindset<span class="tag tag-i" style="margin-left:auto;font-size:9px">IMPACT</span></div><div class="index-card-def">Detectar qué falta y usar todos los recursos disponibles.</div></div>
+    <div class="index-card ic-g" onclick="go('active_listening')"><div class="index-card-title">👂 Active Listening<span class="tag tag-g" style="margin-left:auto;font-size:9px">GROWTH</span></div><div class="index-card-def">Escuchar para entender, no para responder.</div></div>
+    <div class="index-card ic-g" onclick="go('collaboration')"><div class="index-card-title">🤝 Collaboration<span class="tag tag-g" style="margin-left:auto;font-size:9px">GROWTH</span></div><div class="index-card-def">Trabajar sinérgicamente y compartir conocimiento.</div></div>
+    <div class="index-card ic-g" onclick="go('talent_development')"><div class="index-card-title">🌟 Talent Development<span class="tag tag-g" style="margin-left:auto;font-size:9px">GROWTH</span></div><div class="index-card-def">Generar condiciones para que el equipo mejore.</div></div>
+    <div class="index-card ic-g" onclick="go('learnability')"><div class="index-card-title">📚 Learnability<span class="tag tag-g" style="margin-left:auto;font-size:9px">GROWTH</span></div><div class="index-card-def">Aprender de la experiencia y adaptarse continuamente.</div></div>
+    <div class="index-card ic-g" onclick="go('innovation')"><div class="index-card-title">🔧 Innovation<span class="tag tag-g" style="margin-left:auto;font-size:9px">GROWTH</span></div><div class="index-card-def">Generar ideas frescas y transformarlas en valor real.</div></div>
+  </div>
+  <div style="margin-top:32px">
+    <h3 class="section-head">Recursos del programa</h3>
+    <a class="ext-link" href="https://play.teamcookgame.com" target="_blank"><div class="ext-ico" style="background:rgba(255,107,43,.15)">🎮</div><div><strong style="color:var(--text)">Juego TeamCook</strong><div style="font-size:11px;color:var(--text3)">play.teamcookgame.com</div></div><span style="margin-left:auto">↗</span></a>
+    <a class="ext-link" href="https://manage.teamcookgame.com" target="_blank"><div class="ext-ico" style="background:rgba(78,158,255,.15)">⚙️</div><div><strong style="color:var(--text)">Panel de Gestión</strong><div style="font-size:11px;color:var(--text3)">manage.teamcookgame.com</div></div><span style="margin-left:auto">↗</span></a>
+  </div>
+</section>
+
+<!-- STRATEGIC THINKING -->
+<section id="page-strategic_thinking" class="page">
+  <div class="page-eyebrow"><span class="tag tag-i">⚡ RUTA IMPACT</span><span style="color:var(--text3)">Competencia 1 de 5</span></div>
+  <div class="page-title">🧭 Strategic Thinking</div>
+  <div class="page-subtitle">Ver el contexto completo y decidir con mentalidad de negocio</div>
+  <h3 class="section-head">Qué es y por qué existe como competencia</h3>
+  <p class="lead">Strategic Thinking no es sinónimo de ser inteligente ni de tener experiencia. Es la capacidad concreta de conectar cada decisión operativa con el contexto más amplio en el que esa decisión ocurre.</p>
+  <p class="prose">En teoría organizacional, la distinción clásica es entre pensamiento táctico y pensamiento estratégico. El pensamiento táctico responde a la pregunta "¿cómo hago esto?"; el estratégico responde a "¿por qué vale la pena hacerlo, y qué impacto tiene hacerlo en este momento y de esta manera?". En equipos de consultoría tecnológica, la mayoría de las personas son muy capaces tácticamente pero trabajan con contexto estratégico incompleto o ausente.</p>
+  <p class="prose">El problema práctico de la ausencia de pensamiento estratégico no es que las personas hagan las cosas mal. Es que las hacen bien, pero en la dirección equivocada. Un equipo puede ejecutar un sprint impecable y al mismo tiempo no mover ninguna métrica que le importe al cliente, porque nadie conectó las tareas con los objetivos de negocio antes de arrancar.</p>
+  <p class="prose">¿Por qué esto es especialmente crítico en Globant? Porque la distancia entre quien define estrategia y quien ejecuta puede ser grande. Los mandos medios y seniors del programa son el puente. Si ese puente no transmite contexto hacia abajo, los equipos ejecutan en el vacío. Y si tampoco lo demanda hacia arriba, las decisiones de negocio se toman sin insumos de quienes están más cerca de la implementación.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Cómo se ve en el juego</h3>
+  <p class="prose">TeamCook es un juego de cocina caótico donde el equipo tiene que completar pedidos en simultáneo, con recursos limitados, bajo presión de tiempo y con interrupciones frecuentes. Strategic Thinking aparece en los primeros 90 segundos de cada partida: ¿el equipo lee todos los pedidos disponibles antes de arrancar? ¿Alguien identifica las comandas, los tiempos y prioriza? ¿Hay una conversación explícita sobre cómo organizar el trabajo?</p>
+  <p class="prose">Cuando Strategic Thinking está presente, el equipo tiene un momento de planificación colectiva aunque sea breve. Alguien lee las comandas activas y dice algo como "hay tres que comparten ingredientes, empecemos por esas" o "esa comanda está por vencer, vamos primero ahí". Cuando está ausente, cada jugador va a la primera comanda que aparece sin evaluar el estado general. El equipo termina con muchas cosas en proceso simultáneo y pocas completadas, porque nadie eligió qué era más importante antes de arrancar.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">El equipo identifica los pedidos, los tiempos y prioriza comandas durante el juego. Hay al menos 10 segundos de conversación colectiva sobre la estrategia. Las decisiones reflejan esa priorización. Piden la pausa cuando hace falta. Aprenden de las partidas del otro equipo.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El líder abre el planning con contexto de negocio: "este sprint desbloquea la integración del cliente X, que es el objetivo comercial del trimestre". El equipo puede tomar decisiones autónomas coherentes con eso.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">El equipo arranca sin conversar. Cada jugador va a la primera comanda que aparece sin evaluar el estado general. No se usa la pausa aunque el caos lo justifique. El tiempo termina con varios pedidos empezados y pocos completados. Nadie anticipó qué podía pasar ni cómo reorganizarse si algo cambiaba.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El equipo cierra el sprint con todas las tareas completadas. El cliente en la siguiente reunión pregunta por algo que nunca entró al backlog porque nadie lo conectó con la prioridad real del negocio.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">El mecanismo de fondo: por qué cuesta pensar estratégicamente bajo presión</h3>
+  <p class="prose">Hay una razón cognitiva por la cual Strategic Thinking colapsa exactamente cuando más se necesita: la presión activa lo que la neurociencia llama "modo reactivo". Cuando hay urgencia, el cerebro optimiza para respuesta rápida, no para análisis de contexto. En el juego esto se ve claramente: cuando entra un nuevo pedido a la pantalla, el impulso natural es ir por él. Detener ese impulso para preguntarse "¿pero es este el más importante?" requiere un esfuerzo cognitivo activo que el equipo tiene que decidir hacer.</p>
+  <p class="prose">En el trabajo real, la presión del día a día tiene el mismo efecto. Los equipos que no tienen rituales explícitos para preguntarse "¿hacia dónde vamos y por qué?" tienden a optimizar para lo urgente y dejar que lo importante espere indefinidamente. El resultado acumulado de esas micro-decisiones es un equipo muy ocupado que produce poco impacto real.</p>
+  <p class="prose">Para el facilitador, el momento clave de observación en el juego es el inicio de cada ronda. ¿Hay conversación o acción inmediata? ¿Se nombra algún criterio de priorización o cada uno toma lo que puede? Esa diferencia de conducta en los primeros 30 segundos predice bastante bien el comportamiento estratégico del equipo en el trabajo.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="note-box"><strong>Nota:</strong> Hay que seguir y repasar la PPT sí o sí. Estas preguntas suman cuando hay tiempo y apertura del grupo.</div>
+  <div class="q-list">
+    <div class="q-item">En el día a día de tu trabajo, ¿qué tan claro es el criterio de priorización que guía las decisiones del equipo cuando hay varias cosas urgentes al mismo tiempo?</div>
+    <div class="q-item">¿Cuándo fue la última vez que tu equipo cuestionó si lo que estaba haciendo era realmente lo más importante para el cliente en ese momento?</div>
+  </div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('index')">← Índice</button><button class="btn-nav" onclick="go('accountability')">Accountability →</button></div>
+</section>
+
+<!-- ACCOUNTABILITY -->
+<section id="page-accountability" class="page">
+  <div class="page-eyebrow"><span class="tag tag-i">⚡ RUTA IMPACT</span><span style="color:var(--text3)">Competencia 2 de 5</span></div>
+  <div class="page-title">🎯 Accountability</div>
+  <div class="page-subtitle">Asumir responsabilidad por los resultados sin esperar que te lo pidan</div>
+  <h3 class="section-head">Qué es y qué no es Accountability</h3>
+  <p class="lead">Accountability no es culpa. Es la disposición activa a hacerse cargo de lo que ocurre — tanto los resultados positivos como los negativos — sin esperar que alguien externo lo pida o lo asigne.</p>
+  <p class="prose">La distinción entre accountability y responsabilidad formal es importante: la responsabilidad formal es la que aparece en la descripción del puesto. Accountability es lo que ocurre cuando algo sale mal o bien y nadie asignó formalmente ese resultado a nadie. ¿Quién levanta la mano? ¿Quién actúa sin que se lo pidan? Esa diferencia es la que define si un equipo tiene o no tiene accountability como cultura.</p>
+  <p class="prose">En organizaciones matriciales como Globant, donde los roles se superponen, las responsabilidades son difusas y los proyectos involucran múltiples equipos, la ausencia de accountability es especialmente costosa. Los problemas se identifican tarde porque nadie se siente el dueño obvio de resolverlos. Los errores se ocultan porque nadie quiere ser el que los trajo a la superficie. Y las mejoras no se implementan porque "eso es responsabilidad de otro equipo".</p>
+  <p class="prose">Accountability genuina implica tres cosas: reconocer que algo está pasando (no ignorarlo), actuar para resolverlo aunque no sea formalmente tu responsabilidad, y ser transparente respecto al resultado, especialmente cuando es negativo. Los equipos con alta accountability no son equipos sin errores — son equipos donde los errores se hacen visibles rápido y se analizan sin necesidad de buscar culpables.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">El fuego como metáfora perfecta</h3>
+  <p class="prose">En TeamCook, periódicamente aparece un fuego en la cocina. No avisa, no está asignado a nadie, y si nadie lo apaga quema los ingredientes y destruye puntos. Es la metáfora más precisa que el juego ofrece para accountability: un problema visible, con impacto claro en el resultado del equipo, que requiere que alguien lo resuelva sin que nadie se lo pida.</p>
+  <p class="prose">Lo que observar: cuando aparece el fuego, ¿quién lo detecta primero? ¿Lo nombra en voz alta o lo ignora porque está "ocupado con otra cosa"? ¿Hay un acuerdo implícito sobre quién se encarga, o cada uno asume que el otro lo va a resolver? En el debrief posterior, ¿el equipo analiza qué pasó con el fuego o todos naturalizan que se quemaron las ollas?</p>
+  <p class="prose">La secuencia más frecuente cuando accountability está ausente es esta: el fuego aparece, todos lo ven, nadie lo apaga porque "estaban con otra cosa", el fuego se propaga, el daño es mayor de lo que habría sido si alguien hubiera actuado 10 segundos antes. En el debrief, nadie dice "yo debería haber apagado el fuego". Todos explican lo que estaban haciendo cuando ocurrió.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Cuando aparece el fuego, alguien lo detecta, avisa ("¡fuego!") y lo apaga sin que nadie se lo pida. Cuando alguien se equivoca en el emplatado y pierde una comanda completa, el equipo no señala — analiza qué pasó y sigue. En el debrief, nadie busca culpables: la conversación es sobre qué cambiar.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">Después de un bug en producción, el líder convoca un análisis colectivo dentro de las 24hs: qué pasó, qué proceso falló, qué cambia. No hay señalamiento personal. Hay proceso de mejora.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Se culpan o niegan responsabilidad sobre un resultado negativo. Culpan la jugabilidad o dicen que el juego andaba mal, cuando al resto del equipo le funcionaba bien.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">Un bug crítico estuvo tres días en producción. Cada área dijo que era responsabilidad de otra. El cliente lo descubrió antes que el equipo interno. Nadie tiene claro quién era el dueño del problema.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Por qué la cultura de accountability no se declara, se construye</h3>
+  <p class="prose">Uno de los errores más frecuentes en las organizaciones es intentar instalar accountability a través de discursos o normas formales ("acá todos somos responsables de los resultados"). Eso no funciona porque accountability no es un valor declarado, es un patrón de comportamiento que se forma o se destruye en interacciones cotidianas muy concretas: cómo reacciona el equipo cuando alguien señala un problema, cómo se analiza un error, si las personas que se hacen cargo de situaciones difíciles son reconocidas o desgastadas por eso.</p>
+  <p class="prose">En el juego, el facilitador puede observar si el equipo tiene o no tiene ese patrón de base. Y en el Rescate, la conversación más poderosa no es "¿por qué no se encargaron del fuego?" sino "¿qué necesitaría existir en su equipo para que cuando aparezca un problema, la respuesta natural sea hacerse cargo y no buscar a quién asignarle la responsabilidad?"</p>
+  <p class="prose">La diferencia entre accountability individual y colectiva también vale trabajarla: accountability individual es que cada persona se hace cargo de sus resultados. Accountability colectiva es que el equipo se hace cargo del resultado grupal, lo que implica que si alguien está fallando, otro interviene para ayudar antes de que el problema escale.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="note-box"><strong>Nota:</strong> Hay que seguir y repasar la PPT sí o sí. Estas preguntas suman cuando hay tiempo y apertura del grupo.</div>
+  <div class="q-list">
+    <div class="q-item">Cuando algo sale mal en tu equipo, ¿la primera conversación es sobre qué proceso falló, o sobre quién es el responsable? ¿Qué cambia dependiendo de eso?</div>
+    <div class="q-item">¿Cuándo fue la última vez que alguien de tu equipo señaló un problema que no era formalmente suyo y actuó para resolverlo? ¿Qué pasó después?</div>
+  </div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('strategic_thinking')">← Strategic Thinking</button><button class="btn-nav" onclick="go('customer_value')">Customer Value →</button></div>
+</section>
+
+<!-- CUSTOMER VALUE -->
+<section id="page-customer_value" class="page">
+  <div class="page-eyebrow"><span class="tag tag-i">⚡ RUTA IMPACT</span><span style="color:var(--text3)">Competencia 3 de 5</span></div>
+  <div class="page-title">💡 Customer Value & Execution</div>
+  <div class="page-subtitle">Ejecutar lo que genera impacto real, no lo que es conveniente o fácil</div>
+  <h3 class="section-head">La brecha entre ejecución y valor</h3>
+  <p class="lead">Es posible trabajar duro, entregar a tiempo y cumplir todos los indicadores internos, y al mismo tiempo no generar ningún valor para el cliente. Esa paradoja es el núcleo de esta competencia.</p>
+  <p class="prose">Customer Value & Execution no es sobre esfuerzo. Es sobre el criterio que guía la priorización. Hay dos formas de elegir qué hacer primero: elegir lo que genera más impacto para el cliente, o elegir lo que es más fácil o más cómodo de ejecutar. La mayoría de los equipos bajo presión caen en la segunda opción sin darse cuenta, porque el sistema de incentivos inmediato recompensa el cierre de tareas, no el impacto generado.</p>
+  <p class="prose">En el contexto de consultoría tecnológica, esta competencia es especialmente difícil de desarrollar porque el cliente no siempre sabe articular qué genera valor para él, y el equipo técnico no siempre tiene visibilidad del negocio del cliente. El resultado es que los sprints se planifican con criterios técnicos o de "features" sin un ancla clara en métricas de negocio. Al cierre de proyecto, el equipo entregó todo lo comprometido, y el cliente igual no está satisfecho porque lo comprometido no era lo que necesitaba.</p>
+  <p class="prose">La pregunta que define esta competencia es simple pero difícil de sostener bajo presión: "¿esto que estamos a punto de ejecutar mueve algún indicador que le importe al cliente?" Si la respuesta no está clara, detener la ejecución para obtener esa claridad es exactamente lo que la competencia exige, aunque implique conversaciones incómodas con el cliente o con el equipo.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Cómo se ve en el juego</h3>
+  <p class="prose">En TeamCook, los puntos se generan únicamente cuando una comanda completa llega a la ventana de entrega. No importa cuánto se picó, cuánto se cocinó ni cuánto se movió el equipo — si el plato no se entregó, no sumó nada.</p>
+  <p class="prose">Lo que aparece frecuentemente es esto: el equipo está visiblemente ocupado, todos hacen algo, hay mucho movimiento en pantalla, y sin embargo pocas comandas llegan a destino. Alguien está picando ingredientes que nadie va a usar en los próximos 30 segundos. Alguien está lavando platos cuando hay una comanda lista para entregar. El esfuerzo es real, la actividad es real, pero el output — lo único que el juego efectivamente mide — no aparece.</p>
+  <p class="prose">Esa brecha entre actividad y resultado es exactamente Customer Value & Execution: el equipo optimizó para mantenerse ocupado, no para entregar lo que genera impacto.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">El equipo tiene claro en todo momento qué comanda está más cerca de completarse y concentra su energía en llevarla a la ventana. Antes de arrancar una tarea nueva, alguien pregunta qué es lo que más falta para entregar. Las acciones intermedias (picar, cocinar) están al servicio de la entrega, no al revés.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">Antes de cada entrega, el equipo se pregunta: ¿esto mueve la métrica que importa al cliente? Si la respuesta no está clara, se consulta antes de ejecutar. El criterio de priorización es visible y compartido.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Todos están ocupados pero pocas comandas salen. El equipo hace muchas cosas intermedias sin conectarlas con lo que el juego efectivamente mide. Al terminar la partida, el puntaje sorprende negativamente a pesar del esfuerzo visible.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El sprint cierra con 12 tareas completadas. El cliente abre el siguiente pidiendo exactamente lo mismo que el anterior: lo entregado no movió ningún indicador que le importara.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Cómo facilitar la toma de conciencia sin que sea una crítica</h3>
+  <p class="prose">El desafío en el Rescate con esta competencia es que la conversación puede percibirse fácilmente como una crítica al esfuerzo del equipo ("trabajaron mucho pero priorizaron mal"). El facilitador tiene que separar esas dos cosas con mucho cuidado. El equipo probablemente puso todo su esfuerzo — y eso es válido. Lo que está en discusión no es el esfuerzo sino el criterio que guió las decisiones.</p>
+  <p class="prose">Una forma de abordarlo que funciona bien es partir del puntaje final y trabajar hacia atrás: "Estuvieron activos todo el tiempo. Si miramos cuántas comandas llegaron a la ventana versus cuántas acciones hicieron en total, ¿qué observamos?" Eso abre la conversación sin señalar a nadie.</p>
+  <p class="prose">Lo segundo es conectarlo con una pregunta muy concreta sobre el trabajo real: ¿hubo en el último proyecto alguna semana donde el equipo estuvo muy ocupado pero al cliente no le llegó nada? ¿Qué estaban haciendo? Esa pregunta lleva la reflexión a terreno concreto y accionable.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="q-list">
+    <div class="q-item">¿Hubo momentos en el juego donde todos estaban haciendo algo pero pocas comandas llegaban a la ventana? ¿Qué estaban priorizando en esos momentos?</div>
+    <div class="q-item">¿Hay algo que tu equipo hace bien pero que el cliente casi no nota? ¿Por qué creés que eso pasa?</div>
+    <div class="q-item">¿Cuál es la métrica que realmente mueve la aguja para tu cliente? ¿El equipo la tiene visible cuando prioriza el backlog?</div>
+    <div class="q-item">Si tu cliente calificara el impacto del último sprint en su negocio, ¿qué nota le pondría? ¿Qué diferencia habría con la nota que le pondría el equipo al mismo sprint?</div>
+  </div>
+  <div class="rescue-box"><div class="rh">Oración para el Rescate</div><div class="rt">"Estuvieron activos todo el tiempo — eso es real. Pero si miramos el puntaje final versus la cantidad de cosas que hicieron, hay una brecha. Esa brecha tiene un nombre: Customer Value & Execution. No es un problema de esfuerzo, es un problema de criterio. En el trabajo, ¿cómo saben cuándo están ejecutando hacia lo que el cliente necesita y cuándo están simplemente ejecutando?"</div></div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('accountability')">← Accountability</button><button class="btn-nav" onclick="go('adaptability')">Adaptability →</button></div>
+</section>
+
+<!-- ADAPTABILITY -->
+<section id="page-adaptability" class="page">
+  <div class="page-eyebrow"><span class="tag tag-i">⚡ RUTA IMPACT</span><span style="color:var(--text3)">Competencia 4 de 5</span></div>
+  <div class="page-title">⚡ Adaptability</div>
+  <div class="page-subtitle">Reorganizarse rápido ante el cambio sin caer en el caos</div>
+  <h3 class="section-head">La diferencia entre flexibilidad y adaptabilidad</h3>
+  <p class="lead">Adaptabilidad no es simplemente aceptar los cambios con buena disposición. Es la capacidad de reorganizar activamente el trabajo, los roles y las prioridades en respuesta a un cambio de contexto, sin perder efectividad en el proceso.</p>
+  <p class="prose">La confusión más frecuente es entre flexibilidad actitudinal y adaptabilidad comportamental. Una persona puede decir que acepta el cambio con perfecta disposición y al mismo tiempo tardar semanas en reorganizar su forma de trabajar cuando el contexto cambia. La actitud importa, pero no es suficiente. Adaptabilidad se mide en comportamientos: ¿qué hace el equipo en los primeros 10 minutos después de recibir un cambio significativo?</p>
+  <p class="prose">En el contexto de consultoría tecnológica, el cambio de contexto es una constante estructural. Los clientes cambian requerimientos, los alcances se renegocian, los miembros del equipo rotan, las tecnologías evolucionan. Los equipos con alta adaptabilidad no son los que sufren menos con los cambios, sino los que recuperan velocidad más rápido después de ellos.</p>
+  <p class="prose">El costo de la baja adaptabilidad no es inmediato — eso hace que sea difícil de ver. Un equipo que se paraliza durante dos semanas cada vez que hay un cambio de alcance no colapsa, pero pierde ciclos valiosos y acumula frustración. A largo plazo, esa fricción constante con el cambio deteriora la moral del equipo y la confianza del cliente.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">La rotación de posiciones: el experimento que el juego hace posible</h3>
+  <p class="prose">Una de las crisis que el facilitador puede introducir en TeamCook es la rotación forzada de posiciones: de repente, cada jugador tiene que moverse a una estación distinta. Esta crisis es extraordinariamente reveladora porque es un cambio de contexto limpio: las reglas del juego no cambiaron, los objetivos no cambiaron, solo cambió quién está en cada lugar.</p>
+  <p class="prose">La respuesta del equipo a esa perturbación es el indicador de adaptabilidad más claro que el juego ofrece. Un equipo con alta adaptabilidad tarda 15-20 segundos en reorganizarse: hay una conversación rápida, alguien toma el liderazgo de la transición ("vos al fuego, yo a las ollas, vos a entregas"), y el juego continúa. Un equipo con baja adaptabilidad entra en parálisis: todos hablan al mismo tiempo, nadie escucha, cada uno intenta replicar lo que hacía antes en su nueva posición sin entender el sistema completo, y el rendimiento colapsa por 1-2 minutos completos.</p>
+  <p class="prose">Lo más importante que observar no es si al equipo le cuesta la transición — es normal que cueste — sino si alguien actúa para acelerar esa transición o si todos esperan que el caos se resuelva solo.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Ante la rotación o el fuego, el equipo toma 15 segundos para reasignarse. Hay una conversación de transición explícita y corta. Nadie entra en bucle esperando que alguien más decida.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El cliente cambia el alcance en semana 4 de 6. El líder convoca 30 minutos: ¿qué sigue siendo válido?, ¿qué se suelta?, ¿quién hace qué? El equipo arranca la semana reorientado.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">El facilitador activa la rotación. El equipo se paraliza 40 segundos, todos hablan al mismo tiempo sin escucharse. Nadie toma el liderazgo de la transición. El puntaje colapsa.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El cambio de requerimiento genera tres semanas de reuniones sin decisión. El equipo espera que alguien de arriba defina antes de moverse. El proyecto se retrasa no por el cambio sino por la parálisis ante el cambio.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Lo que diferencia a los equipos que se adaptan bien</h3>
+  <p class="prose">La investigación en equipos de alto desempeño identifica tres factores que predicen la adaptabilidad colectiva. Primero, la claridad de objetivo: cuando el objetivo está claro, el equipo puede reorganizar los medios sin perder el norte. Cuando el objetivo también es ambiguo, el cambio de contexto produce desorientación total. Segundo, la confianza interpersonal: los equipos que se adaptan bien son los que confían en que sus integrantes van a actuar bien aunque nadie los supervise durante la transición. Tercero, los rituales de transición: los equipos que tienen protocolos para los momentos de cambio (aunque sean informales) los atraviesan mejor que los que improvisan todo desde cero cada vez.</p>
+  <p class="prose">Para el facilitador, la conversación más productiva no es "¿por qué les costó adaptarse?" sino "¿qué tiene su equipo hoy que les permite atravesar los cambios mejor, y qué falta?" Eso convierte la observación del juego en un diagnóstico útil en lugar de una crítica.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="q-list">
+    <div class="q-item">¿En qué momento del juego el equipo se tuvo que reorganizar? ¿Cómo respondieron en esos primeros segundos?</div>
+    <div class="q-item">¿Qué es lo primero que hace tu equipo cuando llega un cambio significativo? ¿Hay un proceso, o cada vez se improvisa desde cero?</div>
+    <div class="q-item">¿Cuál es la diferencia entre cómo responde tu equipo a un cambio que viene bien versus a uno que sorprende? ¿Qué lo explica?</div>
+    <div class="q-item">Si tuvieran que diseñar un protocolo de 30 minutos para absorber cambios de alcance, ¿qué tendría que incluir para que el equipo pudiera arrancar la semana siguiente reorientado?</div>
+  </div>
+  <div class="rescue-box"><div class="rh">Oración para el Rescate</div><div class="rt">"Cuando activé la rotación de posiciones, el equipo tardó casi un minuto en volver a funcionar. Eso no es una crítica al equipo — es un dato interesante. El juego no cambió, los pedidos no cambiaron, solo cambió quién estaba en cada lugar. Esa parálisis ante el cambio de contexto tiene un nombre: Adaptability ausente. Y eso que vivieron en el juego en 40 segundos, en el trabajo puede durar semanas. Pregunta: ¿quién suele ser el que dice 'ok, reorganicémonos' en su equipo? ¿Siempre es la misma persona?"</div></div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('customer_value')">← Customer Value</button><button class="btn-nav" onclick="go('ai_mindset')">AI Mindset →</button></div>
+</section>
+
+<!-- AI MINDSET -->
+<section id="page-ai_mindset" class="page">
+  <div class="page-eyebrow"><span class="tag tag-i">⚡ RUTA IMPACT</span><span style="color:var(--text3)">Competencia 5 de 5</span></div>
+  <div class="page-title">🤖 AI Mindset</div>
+  <div class="page-subtitle">Detectar qué información falta y usar todos los recursos disponibles para decidir mejor</div>
+  <h3 class="section-head">Una competencia de liderazgo, no de tecnología</h3>
+  <p class="lead">AI Mindset no es sobre saber usar herramientas de IA. Es sobre la disposición de un líder o un equipo a preguntarse activamente qué información o capacidad les falta, y salir a buscarla con los recursos disponibles.</p>
+  <p class="prose">La IA generativa cambió el umbral de lo que es accesible para un equipo sin conocimientos técnicos especializados. Sintetizar documentos extensos, preparar análisis previos a una reunión, generar borradores, procesar feedback de clientes, automatizar reportes repetitivos — todo eso está al alcance de cualquier equipo que tenga el hábito de preguntarse si hay una forma mejor de hacer lo que ya hace.</p>
+  <p class="prose">El problema no es la herramienta. Es que ese hábito no se instala solo: depende casi enteramente de si el líder lo modela, lo propone y protege el espacio para experimentar.</p>
+  <p class="prose">Los mandos medios y seniors del programa son el principal canal de adopción tecnológica de sus equipos. No porque tengan que ser los más técnicos, sino porque son los que habilitan o frenan la cultura de exploración. Un equipo cuyo líder nunca menciona lo que está probando, nunca pregunta qué está experimentando el equipo, y nunca abre espacio para compartir aprendizajes va a seguir trabajando exactamente como trabajaba hace dos años — aunque las herramientas disponibles sean radicalmente distintas.</p>
+  <p class="prose">La brecha de adopción de IA en la mayoría de las organizaciones no es técnica. Es de liderazgo.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Cómo se ve en el trabajo</h3>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-text">El líder comparte abiertamente lo que está probando: "usé esta herramienta para preparar el análisis del cliente y me cambió la reunión — acá está lo que hice". Hay un espacio regular, aunque sea informal, para que el equipo comparta qué está experimentando. Las tareas repetitivas — reportes, síntesis, borradores, seguimientos — se cuestionan periódicamente: ¿esto lo podemos hacer diferente? Cuando alguien encuentra una forma mejor de hacer algo con IA, eso se comparte y se adopta, no queda guardado en el uso individual de una sola persona.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-text">Cada persona usa las herramientas que ya conocía. Nadie sabe bien qué está experimentando el resto del equipo. Las tareas repetitivas siguen igual porque nunca se preguntó si había una forma mejor. Cuando alguien usa IA, lo hace de forma individual y silenciosa — no porque no quiera compartirlo, sino porque no hay un espacio donde eso sea parte de la conversación del equipo.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">El error más frecuente al intentar desarrollarlo</h3>
+  <p class="prose">Forzar la adopción de herramientas específicas. "A partir de ahora todos usan X" genera resistencia inmediata y cumplimiento superficial — la persona abre la herramienta, no le encuentra la vuelta, y vuelve a lo que conocía.</p>
+  <p class="prose">Lo que funciona es instalar la pregunta antes que la herramienta: "¿qué parte de esto que estamos haciendo podría hacerse diferente?" Cuando el equipo reconoce la brecha — una tarea que les consume tiempo, un análisis que llegan a hacer a medias, un reporte que nadie lee porque lleva horas — la herramienta aparece sola como parte de la solución.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Cómo conectarlo con el juego</h3>
+  <p class="prose">En el juego hay recursos disponibles que los equipos a veces no activan — información en pantalla, la pausa, lo que aprendieron observando al otro equipo. Esa dinámica sirve como punto de entrada para la conversación: la pregunta no es si tenían los recursos, sino si el equipo tiene el hábito de preguntarse qué tiene disponible antes de arrancar a reaccionar. Ese mismo hábito es el que define AI Mindset en el trabajo.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="q-list">
+    <div class="q-item">Si fueran los dueños de este restaurante y pudieran implementar IA, ¿qué automatizarían primero? ¿Y qué dejarían para el criterio humano? → Ahora hagan la misma pregunta sobre su equipo.</div>
+    <div class="q-item">¿Hay alguna tarea que tu equipo hace todas las semanas que les consume tiempo desproporcionado para el valor que genera? ¿Alguien ya probó hacerla diferente?</div>
+    <div class="q-item">¿Cómo se enteran en tu equipo cuando alguien encuentra una forma mejor de hacer algo? ¿Eso se comparte o queda en el uso individual?</div>
+    <div class="q-item">¿Qué debería pasar en tu equipo para que experimentar con nuevas herramientas sea algo normal y no una excepción?</div>
+  </div>
+  <div class="rescue-box"><div class="rh">Oración para el Rescate</div><div class="rt">"AI Mindset no es una competencia técnica — es una competencia de liderazgo. La pregunta no es si tu equipo sabe usar IA. Es si vos creás las condiciones para que el equipo se pregunte regularmente cómo podría trabajar mejor con lo que tiene disponible. Eso no lo instala ninguna herramienta — lo instala el líder."</div></div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('adaptability')">← Adaptability</button><button class="btn-nav" onclick="go('active_listening')">Active Listening →</button></div>
+</section>
+
+<!-- ACTIVE LISTENING -->
+<section id="page-active_listening" class="page">
+  <div class="page-eyebrow"><span class="tag tag-g">🌱 RUTA GROWTH</span><span style="color:var(--text3)">Competencia 1 de 5</span></div>
+  <div class="page-title">👂 Active Listening</div>
+  <div class="page-subtitle">Escuchar para entender, no para responder</div>
+  <h3 class="section-head">Lo que hace que escuchar sea una habilidad y no un instinto</h3>
+  <p class="lead lead-g">Escuchar no es el período de silencio entre dos personas hablando. Es un proceso activo de construcción de significado que requiere atención, suspensión del juicio y voluntad de ser cambiado por lo que se oye.</p>
+  <p class="prose">La mayoría de las personas cree que escucha bien. La investigación en comunicación organizacional sugiere consistentemente que la calidad de escucha real en equipos de trabajo es mucho más baja de lo que sus integrantes reportan. La razón principal es que escuchar y procesar lo que se va a responder son procesos que compiten por los mismos recursos cognitivos. Mientras alguien está formulando mentalmente su respuesta, no puede estar procesando completamente lo que el otro está diciendo.</p>
+  <p class="prose">En equipos de trabajo, la escucha activa tiene dos niveles que vale distinguir. El primero es la escucha de contenido: ¿entendí los hechos, los datos, la información que el otro comunicó? El segundo, más exigente, es la escucha de intención: ¿entendí qué le importa realmente a esta persona más allá de lo que dijo literalmente? Los malentendidos más costosos no vienen de falla en el primer nivel sino en el segundo.</p>
+  <p class="prose">En equipos distribuidos y multiculturales como los de Globant, el desafío es mayor porque las señales no verbales que complementan el mensaje hablado son parcialmente invisibles. En videoconferencia, el 70-80% del canal de comunicación no verbal se pierde. Eso hace que la verificación explícita del entendimiento — reformular, preguntar, confirmar — sea mucho más importante que en contextos presenciales.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Cómo se ve en el juego</h3>
+  <p class="prose">En TeamCook toda la comunicación pasa por el micrófono, en tiempo real, bajo presión. Eso crea las condiciones perfectas para observar cómo escucha un equipo cuando las cosas se complican.</p>
+  <p class="prose">Hay dos patrones que aparecen con frecuencia y vale observar. El primero es el de los momentos de coordinación: cuando el equipo está definiendo estrategia al inicio de una ronda o después de un error, ¿hablan en orden o todos al mismo tiempo? Cuando hablan todos a la vez, nadie escucha a nadie — y el equipo arranca sin un entendimiento común, cada uno ejecutando lo que interpretó por su cuenta.</p>
+  <p class="prose">El segundo es el de los pedidos de ayuda: durante la partida alguien dice "no puedo emplatar", "no me sale esto", "necesito que alguien venga acá". ¿Qué pasa? A veces nadie responde porque todos están concentrados en lo propio. A veces varios responden al mismo tiempo generando más caos. A veces alguien escucha, evalúa, y responde con precisión. La diferencia entre esos tres escenarios es exactamente la diferencia entre un equipo que escucha y uno que no.</p>
+  <p class="prose">Lo que el juego hace visible es algo que en el trabajo real es difícil de ver: cuándo una persona está hablando pero nadie está realmente procesando lo que dice.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Cuando alguien pide ayuda, alguien específico responde — no todos a la vez ni nadie. En los momentos de coordinación, hay una voz que termina antes de que empiece otra. Si dos personas hablan al mismo tiempo, alguien cede y escucha. El equipo arranca la ronda con una estrategia que todos entendieron igual.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">En el kickoff, el líder reformula el pedido del cliente antes de responder: "si entiendo bien, lo que más te preocupa es el tiempo de respuesta, no la funcionalidad extra, ¿es correcto?" El cliente se siente escuchado. El sprint arranca alineado. Dentro del equipo, cuando alguien señala un problema, la primera respuesta no es proponer una solución sino entender bien cuál es el problema.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Alguien pide ayuda y nadie responde porque todos están en lo suyo. O responden tres al mismo tiempo y se genera más desorden. En los momentos de coordinación, todos hablan a la vez y el equipo arranca sin saber bien qué acordaron — cada uno ejecuta lo que interpretó.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El sprint arranca con tres interpretaciones distintas del mismo requerimiento. Nadie lo detectó antes porque en el kickoff todos parecían estar de acuerdo — pero nadie verificó que estuvieran de acuerdo en lo mismo. Al final del sprint, cada parte del equipo entregó algo diferente.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">La reformulación como herramienta concreta</h3>
+  <p class="prose">De todas las técnicas de escucha activa, la reformulación es la más poderosa y la que más impacto inmediato tiene en la calidad de las conversaciones de trabajo. Reformular no es repetir lo que el otro dijo — es restituir la esencia de su mensaje con las propias palabras y verificar que esa interpretación es correcta.</p>
+  <p class="prose">La fórmula práctica es simple: "Lo que entiendo es [tu interpretación]. ¿Es correcto?" Esa verificación de 10 segundos tiene un efecto doble: le muestra al otro que fue escuchado — lo que reduce la defensividad y abre la colaboración — y le da la oportunidad de corregir interpretaciones incorrectas antes de que se conviertan en acciones incorrectas.</p>
+  <p class="prose">Para el facilitador, el Rescate con esta competencia funciona mejor cuando se parte de una escena concreta del juego — un momento donde alguien pidió ayuda y no fue escuchado, o donde el equipo habló en simultáneo y arrancó descoordinado — y se trabaja desde ahí hacia la reflexión sobre cómo se vive eso en el trabajo real.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="q-list">
+    <div class="q-item">¿Hubo algún momento en el juego donde alguien pidió ayuda y nadie respondió — o todos respondieron al mismo tiempo? ¿Qué pasó después?</div>
+    <div class="q-item">¿Cuándo fue la última vez que en tu equipo alguien verificó que todos entendían lo mismo antes de arrancar a ejecutar?</div>
+    <div class="q-item">¿Qué señal te indica que la persona con la que hablás en una reunión no te está escuchando realmente? ¿Cómo afecta eso la conversación?</div>
+    <div class="q-item">¿Qué cambiaría en las reuniones de tu equipo si antes de pasar a las decisiones, alguien reformulara los puntos principales y verificara que todos entendieron lo mismo?</div>
+  </div>
+  <div class="rescue-box"><div class="rh">Oración para el Rescate</div><div class="rt">"En el juego hubo momentos donde alguien pidió ayuda y no pasó nada — o pasaron demasiadas cosas al mismo tiempo. Eso que parece un problema de coordinación en realidad es un problema de escucha: nadie procesó realmente lo que el otro necesitaba. Active Listening no es estar en silencio mientras el otro habla — es verificar que lo que entendiste es lo que el otro quiso decir. Pregunta: ¿en qué reunión de trabajo sienten que ese mismo patrón aparece más seguido?"</div></div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('ai_mindset')">← AI Mindset</button><button class="btn-nav" onclick="go('collaboration')">Collaboration →</button></div>
+</section>
+
+<!-- COLLABORATION -->
+<section id="page-collaboration" class="page">
+  <div class="page-eyebrow"><span class="tag tag-g">🌱 RUTA GROWTH</span><span style="color:var(--text3)">Competencia 2 de 5</span></div>
+  <div class="page-title">🤝 Collaboration</div>
+  <div class="page-subtitle">Trabajar sinérgicamente: compartir conocimiento y apoyar a los colegas hacia un objetivo común</div>
+  <h3 class="section-head">La diferencia entre coordinación y colaboración</h3>
+  <p class="lead lead-g">Colaboración genuina no es coordinación eficiente. Es algo más: es el compromiso activo de aportar al resultado colectivo más allá del propio rol, especialmente cuando el equipo lo necesita y nadie lo pidió.</p>
+  <p class="prose">La coordinación es el intercambio eficiente de información para que el trabajo avance sin fricciones. La colaboración agrega algo que la coordinación no tiene: la disposición a salir del propio territorio funcional para ayudar a otro, compartir conocimiento que podría ser poder, o tomar una tarea que no es formalmente tuya porque el equipo la necesita.</p>
+  <p class="prose">La distinción importa porque muchos equipos que creen colaborar en realidad solo coordinan bien. Tienen buenas herramientas de gestión, buenos procesos de sincronización, buena comunicación del estado del trabajo. Pero cuando alguien está bloqueado, nadie se ofrece proactivamente a ayudar. Cuando alguien tiene conocimiento crítico, lo comparte solo cuando se lo piden. Cuando el objetivo colectivo exige ceder territorio, nadie da el primer paso.</p>
+  <p class="prose">El test más claro de colaboración real en un equipo es este: ¿qué pasa cuando dos personas de áreas diferentes podrían resolver un problema juntas pero hacerlo implicaría que una de ellas invierta tiempo en algo que no está en sus métricas individuales? En equipos con alta colaboración, eso ocurre naturalmente. En equipos con baja colaboración, el problema espera a que alguien lo escale.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">El peligro de los dos líderes informales</h3>
+  <p class="prose">En TeamCook aparece frecuentemente una dinámica que vale analizar con cuidado: el equipo tiene dos o tres jugadores que naturalmente toman el liderazgo operativo de la cocina, definen la estrategia, y coordinan al resto. En los primeros minutos eso funciona bien y el puntaje es alto.</p>
+  <p class="prose">El problema aparece cuando esos líderes se bloquean entre sí — porque tienen visiones distintas sobre la prioridad del momento — o cuando uno de ellos se concentra en una tarea larga y el flujo que dependía de él se detiene. En ese momento, los jugadores que ejecutaban instrucciones quedan sin dirección porque nunca entendieron la lógica estratégica, solo los pedidos específicos.</p>
+  <p class="prose">Eso es concentración de conocimiento y concentración de decisión: lo opuesto de colaboración distribuida. El equipo funcionó bien hasta que las condiciones cambiaron. Cuando cambiaron, reveló que la colaboración era superficial — había coordinación, pero el conocimiento crítico y la capacidad de decisión vivían en dos personas, no en el colectivo.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Los jugadores se avisan cuando un pedido está por completarse, piden ayuda cuando están bloqueados, y redistribuyen el trabajo cuando alguien queda libre. Se ayudan cuando alguien no entiende algo. Nadie ignora a quien no está pudiendo participar — lo integran activamente. El conocimiento del estado del juego está distribuido.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El equipo tiene una práctica semanal de hacer explícitas las dependencias: "¿quién necesita algo de quién esta semana?" Los bloqueos se resuelven antes de que escalen porque son visibles.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Dos jugadores controlan todo. Los otros tres ejecutan instrucciones sin entender el por qué. Alguien se queda trabado y nadie lo ayuda. Uno que juega mejor acapara el juego para entregar más rápido sin preocuparse por la participación del resto. Cuando los dos líderes se bloquean, el equipo completo se detiene.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">Dos seniors concentran las decisiones técnicas. Cuando alguno está de vacaciones, el equipo no puede avanzar solo. El conocimiento no se distribuyó y la colaboración fue en un solo sentido.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="q-list">
+    <div class="q-item">¿Cómo se distribuyó la toma de decisiones en el equipo durante el juego? ¿Fue pareja o concentrada en pocas personas?</div>
+    <div class="q-item">¿Qué pasaría en tu equipo si las dos personas que más saben no estuvieran disponibles durante una semana? ¿Qué se detendría?</div>
+    <div class="q-item">¿Hay conocimiento en tu equipo que vive en una sola persona? ¿Qué pasó la última vez que esa persona no estuvo?</div>
+    <div class="q-item">¿Cuándo fue la última vez que alguien de tu equipo ayudó proactivamente a otro sin que se lo pidieran? ¿Qué lo hizo posible?</div>
+  </div>
+  <div class="rescue-box"><div class="rh">Oración para el Rescate</div><div class="rt">"Terminaron la partida con buen puntaje. Pero cuando les pregunto a todos qué estrategia usaron, algunos no la pueden explicar. Eso significa que el resultado fue bueno, pero la colaboración fue incompleta: el conocimiento quedó concentrado en dos personas y el resto ejecutó instrucciones. Pregunta: ¿en qué se parece eso a cómo funciona la toma de decisiones en su equipo hoy?"</div></div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('active_listening')">← Active Listening</button><button class="btn-nav" onclick="go('talent_development')">Talent Development →</button></div>
+</section>
+
+<!-- TALENT DEVELOPMENT -->
+<section id="page-talent_development" class="page">
+  <div class="page-eyebrow"><span class="tag tag-g">🌱 RUTA GROWTH</span><span style="color:var(--text3)">Competencia 3 de 5</span></div>
+  <div class="page-title">🌟 Talent Development</div>
+  <div class="page-subtitle">Mentorear y generar condiciones para que el equipo mejore</div>
+  <h3 class="section-head">Por qué desarrollar talento es una decisión estratégica, no solo humana</h3>
+  <p class="lead lead-g">Los líderes que desarrollan talento no lo hacen solo porque les importe el crecimiento de las personas. Lo hacen porque entienden que la única forma de escalar un equipo es multiplicar la capacidad, no concentrarla.</p>
+  <p class="prose">La rotación de talento en el sector tecnológico es alta por razones estructurales: la demanda supera la oferta, el mercado es global, y los profesionales más calificados tienen opciones permanentes. En ese contexto, retener talento depende en gran medida de si las personas sienten que están creciendo. Y el principal responsable de ese crecimiento no es el departamento de RRHH ni las plataformas de e-learning corporativas — es el líder directo.</p>
+  <p class="prose">Investigación en gestión de personas consistentemente muestra que el factor número uno que predice si un profesional se queda o se va no es el salario, sino la calidad de la relación con su líder inmediato — específicamente, si ese líder invierte en su desarrollo activamente. Eso convierte Talent Development no solo en una competencia de liderazgo deseable, sino en una variable crítica de negocio.</p>
+  <p class="prose">La trampa más frecuente de los líderes que no desarrollan talento no es la falta de interés — la mayoría quiere que su equipo crezca. Es la urgencia: cuando el tiempo apremia, el líder hace las cosas él mismo porque es más rápido que enseñarle a otro. Esa decisión es correcta en el corto plazo y costosa en el mediano: el equipo no crece, el líder se convierte en cuello de botella, y las personas más ambiciosas eventualmente se van a buscar un lugar donde puedan aprender.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">El feedback en el momento: la herramienta más subutilizada</h3>
+  <p class="prose">En TeamCook, los momentos de desarrollo de talento ocurren entre partidas o durante las partidas mismas cuando alguien con más experiencia toma 10 segundos para mostrarle a otro qué hacer. Esos momentos son breves, concretos y tienen impacto inmediato y visible: en la siguiente partida, la persona que recibió la orientación rinde mejor y contribuye al puntaje colectivo.</p>
+  <p class="prose">Lo que el juego hace es mostrar en tiempo real algo que en el trabajo real es difícil de ver: la curva de retorno del tiempo invertido en desarrollar a otros. El jugador que se detiene 10 segundos a mostrarle algo al jugador nuevo "pierde" esos 10 segundos de producción individual — y el equipo gana 3 partidas de mejor rendimiento de ese jugador.</p>
+  <p class="prose">El feedback en el momento tiene un valor que el feedback formal no tiene: está anclado en una experiencia reciente y concreta, lo que lo hace mucho más procesable por quien lo recibe. Un comentario dado 24 horas después de una reunión donde alguien gestionó bien una situación difícil tiene diez veces más impacto que ese mismo comentario dado en una evaluación semestral desconectada del contexto.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Cuando un jugador comete un error, alguien le muestra brevemente qué hacer sin detener el juego. En la siguiente partida ese jugador mejora visible y contribuye al puntaje colectivo.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">Después de una reunión donde un junior gestionó bien un momento difícil, el líder lo menciona específicamente: qué hizo bien y por qué importó en ese contexto. El feedback es concreto y oportuno.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Los jugadores rápidos nunca explican qué están haciendo. Los que jugaron peor no saben por qué ni qué cambiar. El conocimiento existía en el equipo — no se compartió.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">En la evaluación semestral, el líder descubre que un integrante tiene exactamente las mismas áreas de mejora que hace seis meses. La experiencia diaria no se convirtió en aprendizaje porque nadie generó las condiciones.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="q-list">
+    <div class="q-item">¿Hubo en el juego algún momento donde alguien ayudó a otro a mejorar su desempeño en tiempo real? ¿Qué pasó después en las partidas siguientes?</div>
+    <div class="q-item">¿Cuándo fue la última vez que alguien de tu equipo mejoró notablemente en algo? ¿Qué lo hizo posible?</div>
+    <div class="q-item">¿Con qué frecuencia das feedback específico y concreto a tu equipo fuera de los espacios formales de evaluación?</div>
+    <div class="q-item">¿Cuál es el integrante de tu equipo con más potencial de crecimiento en este momento? ¿Qué estás haciendo activamente para que ese potencial se desarrolle?</div>
+  </div>
+  <div class="rescue-box"><div class="rh">Oración para el Rescate</div><div class="rt">"En la partida 2, uno de ustedes se trabó en su posición y no encontraba el ritmo. Otros lo vieron. Nadie le dijo nada. Terminamos la partida con ese jugador en el mismo nivel de rendimiento que al principio. Eso es Talent Development ausente: el conocimiento existía en el equipo, pero no se compartió. Pregunta: ¿qué hubiera pasado si alguien hubiera invertido 15 segundos en ese momento?"</div></div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('collaboration')">← Collaboration</button><button class="btn-nav" onclick="go('learnability')">Learnability →</button></div>
+</section>
+
+<!-- LEARNABILITY -->
+<section id="page-learnability" class="page">
+  <div class="page-eyebrow"><span class="tag tag-g">🌱 RUTA GROWTH</span><span style="color:var(--text3)">Competencia 4 de 5</span></div>
+  <div class="page-title">📚 Learnability</div>
+  <div class="page-subtitle">Aprender de la experiencia y adaptarse a nueva información de forma continua</div>
+  <h3 class="section-head">Por qué la capacidad de aprender vale más que el conocimiento</h3>
+  <p class="lead lead-g">En un sector donde la tecnología de referencia cambia cada 18 meses, lo que alguien sabe hoy tiene vida útil limitada. Lo que determina la vigencia de un profesional no es su conocimiento actual sino su velocidad de aprendizaje.</p>
+  <p class="prose">Learnability es el concepto que describe esta capacidad: no solo la disposición a aprender, sino la habilidad activa de extraer aprendizaje de la experiencia, incorporar información nueva, y modificar comportamientos en función de lo aprendido. La distinción con curiosidad o motivación de aprendizaje es importante: Learnability se mide en comportamientos observables, no en actitudes declaradas.</p>
+  <p class="prose">La pregunta de diagnóstico más útil para evaluarla en un equipo no es "¿tienen ganas de aprender?" sino "¿qué cambió en cómo trabajan en los últimos seis meses como resultado de lo que aprendieron?" Si la respuesta es difusa o vaga, Learnability es baja independientemente de cuántos cursos completaron.</p>
+  <p class="prose">La trampa de la acumulación sin conversión: muchos equipos tienen experiencia pero poca Learnability. La diferencia está en si tienen mecanismos para convertir la experiencia en aprendizaje transferible. Experiencia sin reflexión es solo repetición. Es posible tener cinco años de experiencia en algo o tener el mismo año de experiencia repetido cinco veces. Learnability es lo que convierte tiempo en conocimiento.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">El patrón entre partidas: el indicador más claro del juego</h3>
+  <p class="prose">TeamCook ofrece un test de Learnability natural y observable: ¿qué hace el equipo entre una partida y la siguiente? ¿Hay una revisión explícita de lo que pasó? ¿Se nombra un cambio concreto para la próxima ronda? ¿En la siguiente partida se ve ese cambio implementado?</p>
+  <p class="prose">Los equipos con alta Learnability tienen una micro-retrospectiva natural incluso en el juego: "el problema fue que nadie se ocupó del fuego", "la estrategia de los pedidos no funcionó, probemos priorizarlos diferente". Y en la siguiente partida el comportamiento cambia. El puntaje mejora de forma sostenida ronda a ronda.</p>
+  <p class="prose">Los equipos con baja Learnability repiten exactamente el mismo patrón en todas las partidas. Cometen los mismos errores en la ronda 3 que en la ronda 1, no porque no hayan visto que algo no funcionó, sino porque no convirtieron esa observación en un cambio de comportamiento concreto. La experiencia del error estuvo disponible — no se procesó.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Entre partidas hay una revisión breve: "¿qué salió mal? ¿qué cambiamos?" En la siguiente ronda, ese cambio se ejecuta. El puntaje mejora de forma sostenida y la curva de aprendizaje es visible.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">Al cerrar cada ciclo o proyecto, el equipo dedica 20 minutos a tres preguntas: ¿qué funcionó?, ¿qué no funcionó?, ¿qué aprendimos que no sabíamos al empezar? Los aprendizajes se registran y se usan en el próximo ciclo.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">El equipo comete el mismo error en la ronda 3 y en la ronda 5. No hubo revisión entre partidas. La experiencia del error existió — no se procesó.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El equipo termina proyectos y arranca el siguiente sin retrospectiva. Los mismos errores de coordinación aparecen sprint tras sprint. La experiencia se acumula pero no se convierte en mejora.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">El ritual de cierre como práctica de Learnability</h3>
+  <p class="prose">La investigación en aprendizaje organizacional muestra que los equipos de alto rendimiento comparten una práctica común: tienen rituales explícitos de cierre que convierten la experiencia en aprendizaje compartido. No importa el formato — puede ser una retrospectiva formal, una conversación de 15 minutos, un documento compartido — lo que importa es que exista un momento donde el equipo se detiene colectivamente a extraer aprendizaje de lo que vivió.</p>
+  <p class="prose">Sin ese ritual, cada persona aprende individualmente — si aprende — y ese aprendizaje no se distribuye al equipo. El resultado es que el equipo como colectivo mejora mucho más lento que la suma de sus individuos, y que cuando alguna persona se va, el aprendizaje que acumuló se va con ella.</p>
+  <p class="prose">Para el facilitador, una de las conversaciones más productivas que el juego habilita es precisamente esta: mostrar al equipo su propia curva de aprendizaje entre rondas (¿mejoró el puntaje?, ¿los mismos errores aparecieron de nuevo?) y conectarlo con la pregunta de si tienen un ritual de cierre en su trabajo que haga que la experiencia colectiva se convierta en mejora colectiva.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="q-list">
+    <div class="q-item">¿El equipo cambió su estrategia entre partidas, o repitió el mismo patrón aunque no funcionara? ¿Qué lo impulsó a cambiar — o qué lo frenó?</div>
+    <div class="q-item">¿Tu equipo tiene algún ritual de cierre que convierta la experiencia en aprendizaje compartido? ¿Cómo funciona en la práctica?</div>
+    <div class="q-item">¿Cuándo fue la última vez que el equipo hizo algo diferente como resultado de un aprendizaje colectivo? ¿Qué lo hizo posible?</div>
+    <div class="q-item">¿Cuál es el error que el equipo repitió más veces en los últimos seis meses? ¿Qué impidió convertirlo en un aprendizaje que cambiara el comportamiento?</div>
+  </div>
+  <div class="rescue-box"><div class="rh">Oración para el Rescate</div><div class="rt">"Entre la ronda 3 y la ronda 4, el equipo tuvo 2 minutos. ¿Qué hicieron con esos 2 minutos? Porque el mismo error que apareció en la ronda 3 apareció en la ronda 4. La experiencia del error estuvo disponible — no se convirtió en cambio de comportamiento. Eso es Learnability ausente. Y eso que pasó en 2 minutos en el juego, en el trabajo puede durar trimestres. Pregunta: ¿qué tendría que pasar diferente al cerrar un ciclo para que el siguiente empiece con esos aprendizajes incorporados?"</div></div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('talent_development')">← Talent Development</button><button class="btn-nav" onclick="go('innovation')">Innovation →</button></div>
+</section>
+
+<!-- INNOVATION -->
+<section id="page-innovation" class="page">
+  <div class="page-eyebrow"><span class="tag tag-g">🌱 RUTA GROWTH</span><span style="color:var(--text3)">Competencia 5 de 5</span></div>
+  <div class="page-title">🔧 Innovation & Improvement</div>
+  <div class="page-subtitle">Generar ideas frescas y transformar lo que podría mejorar en valor real</div>
+  <h3 class="section-head">Por qué innovar es difícil dentro de organizaciones que funcionan</h3>
+  <p class="lead lead-g">Las organizaciones que funcionan bien tienden a conservar los procesos que las hicieron funcionar. Eso es racional en el corto plazo y peligroso en el mediano: lo que funciona hoy fue diseñado para las condiciones de ayer.</p>
+  <p class="prose">Innovation & Improvement no refiere exclusivamente a innovación de producto o tecnológica. Refiere a la capacidad de un equipo de cuestionar sus propios procesos, proponer mejoras antes de que los problemas sean urgentes, y probar nuevas formas de hacer las cosas con una tolerancia razonable a que no todo salga bien en el primer intento.</p>
+  <p class="prose">La barrera más frecuente no es la creatividad — la mayoría de las personas tienen ideas sobre qué podría mejorarse en sus equipos. La barrera es el sistema de incentivos: proponer cambios implica asumir el costo de la transición (tiempo, fricción, posible falla inicial) en un contexto donde los resultados se miden en el corto plazo. Si el líder no protege activamente el espacio para experimentar, el sistema tenderá a conservar lo que ya funciona aunque sea subóptimo.</p>
+  <p class="prose">La naturalización del status quo es el enemigo silencioso de esta competencia. Los procesos redundantes, las reuniones que todos saben que no sirven, los pasos innecesarios que "siempre se hicieron así" — ninguno de esos aparece en el backlog de mejora porque están naturalizados. Se necesita una mirada que no tenga esa naturalización para verlos. Eso es exactamente lo que el juego puede provocar.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">El juego como laboratorio de experimentación segura</h3>
+  <p class="prose">TeamCook tiene una propiedad única que lo hace ideal para trabajar esta competencia: el costo del fracaso es bajo y reversible. Probar una nueva estrategia en la partida 2 y que salga mal no destruye nada — la partida 3 es una nueva oportunidad. Eso crea las condiciones para un tipo de experimentación que en el trabajo real es mucho más difícil de habilitar.</p>
+  <p class="prose">Lo que vale observar es si el equipo usa esa libertad. ¿Alguien propone una estrategia nueva aunque no esté seguro de que funcione? ¿O el equipo tiende a repetir lo que ya probó aunque el rendimiento sea mediocre? La respuesta a esa pregunta es un indicador proxy de cuánto espacio real tiene el equipo para experimentar en su trabajo cotidiano.</p>
+  <p class="prose">Los equipos que en el juego repiten la misma estrategia ronda tras ronda — aunque no funcione bien — generalmente tienen en común que en su trabajo real no tienen espacios habilitados para experimentar. No es falta de imaginación, es condicionamiento: aprendieron que proponer cambios es costoso y arriesgado, entonces dejaron de hacerlo.</p>
+  <div class="contrast">
+    <div class="contrast-card pos">
+      <h4>✅ Cuando está presente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">Alguien propone probar una estrategia diferente aunque no esté seguro de que funcione. El equipo la prueba. Si no sale bien, la analiza y ajusta. El puntaje mejora porque hubo disposición a experimentar.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El equipo propone reemplazar una reunión semanal de 60 minutos con un tablero asíncrono y 20 minutos de sync. Lo prueban dos semanas, lo evalúan con criterios claros, y toman una decisión informada.</div>
+    </div>
+    <div class="contrast-card neg">
+      <h4>❌ Cuando está ausente</h4>
+      <div class="contrast-sub">En el juego</div>
+      <div class="contrast-text">El equipo usa exactamente la misma estrategia en todas las partidas aunque el puntaje no mejore. "Así lo hicimos desde el principio" es la razón implícita. Nadie propone cambiar.</div>
+      <div class="contrast-sub">En el trabajo</div>
+      <div class="contrast-text">El proceso de revisión tiene tres pasos redundantes que todos conocen pero nadie cuestiona. La fricción existe y está naturalizada. "Así se hace acá" es la explicación cuando alguien pregunta por qué.</div>
+    </div>
+  </div>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Cómo instalar experimentación sin caos</h3>
+  <p class="prose">El riesgo de hablar de innovación sin estructura es que el equipo perciba que se está promoviendo el cambio por el cambio, sin criterios. Eso genera resistencia válida: la estabilidad también tiene valor. La forma de resolver esa tensión es hablar de experimentación acotada: no "cambien todo", sino "definan la versión más pequeña de la mejora que se puede probar en dos semanas, pruébenla, y evalúen con criterios claros".</p>
+  <p class="prose">Esa estructura — experimento pequeño, tiempo acotado, evaluación explícita — reduce el costo percibido del cambio y genera evidencia real que reemplaza las conversaciones circulares sobre si algo podría funcionar o no. La mayoría de los equipos que dicen que "no tienen tiempo para innovar" sí tienen tiempo para experimentos de dos semanas. Lo que no tienen es la estructura que haga que eso sea legítimo y manejable.</p>
+  <div class="chapter-divider"></div>
+  <h3 class="section-head">Preguntas para el Rescate Final</h3>
+  <div class="q-list">
+    <div class="q-item">¿Hubo algún momento en el juego donde alguien propuso hacer algo diferente? ¿Cómo respondió el equipo?</div>
+    <div class="q-item">¿Hay algún proceso en tu equipo que todos saben que podría mejorar pero nadie todavía cuestionó? ¿Qué frena esa conversación?</div>
+    <div class="q-item">¿Tu equipo tiene un espacio habilitado para proponer y probar mejoras? ¿Cómo funciona en la práctica — o por qué no existe?</div>
+    <div class="q-item">¿Cuál sería el experimento más pequeño que tu equipo podría hacer en dos semanas para mejorar algo que hoy genera fricción?</div>
+  </div>
+  <div class="rescue-box"><div class="rh">Oración para el Rescate</div><div class="rt">"A lo largo de las partidas, ¿cuántas veces cambió la estrategia del equipo? ¿Alguien propuso algo diferente? Porque hay algo interesante cuando un equipo repite la misma estrategia ronda tras ronda aunque el rendimiento no mejore: generalmente no es falta de ideas. Es que no había permiso implícito para proponer un cambio y asumir el riesgo de que no funcione. Pregunta: en su trabajo, ¿tienen ese permiso? ¿Quién lo da?"</div></div>
+  <div class="scroll-mark"><button class="btn-nav" onclick="go('learnability')">← Learnability</button><button class="btn-nav" onclick="go('index')">↩ Volver al índice</button></div>
+</section>
+
+</main>
+</div>
+
+<script>
+function go(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + pageId);
+  if(target) { target.classList.add('active'); window.scrollTo(0,0); }
+  document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active-i','active-g','active-n'));
+  const activeLink = document.querySelector('[data-page="' + pageId + '"]');
+  if(activeLink) {
+    const ruta = activeLink.querySelector('.sb-ruta');
+    if(ruta && ruta.classList.contains('sb-ruta-i')) activeLink.classList.add('active-i');
+    else if(ruta && ruta.classList.contains('sb-ruta-g')) activeLink.classList.add('active-g');
+    else activeLink.classList.add('active-n');
+  }
+  document.querySelectorAll('.mn-btn').forEach(b => b.classList.remove('act'));
+  const mBtns = document.querySelectorAll('.mn-btn');
+  const pages = ['index','strategic_thinking','accountability','customer_value','adaptability','ai_mindset','active_listening','collaboration','talent_development','learnability','innovation'];
+  const idx = pages.indexOf(pageId);
+  if(idx >= 0 && mBtns[idx]) mBtns[idx].classList.add('act');
+}
+</script>
+</body>
+</html>
